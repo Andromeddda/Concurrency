@@ -14,8 +14,8 @@ public:
 	// Mutex is not copyable
 	BrokenMutex1(const BrokenMutex1& other) = delete;
 
-	void Lock(size_t index);
-	void Unlock();
+	void lock(size_t index);
+	void unlock();
 
 private:
 	std::atomic<bool> want_[2];
@@ -32,8 +32,8 @@ public:
 	// Mutex is not copyable
 	BrokenMutex2(const BrokenMutex1& other) = delete;
 
-	void Lock(size_t index);
-	void Unlock();
+	void lock(size_t index);
+	void unlock();
 
 private:
 	std::atomic<size_t> victim_;
@@ -50,8 +50,8 @@ public:
 	// Mutex is not copyable
 	PetersonMutex(const BrokenMutex1& other) = delete;
 
-	void Lock(size_t index);
-	void Unlock();
+	void lock(size_t index);
+	void unlock();
 
 private:
 	std::atomic<bool> want_[2];

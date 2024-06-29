@@ -1,4 +1,6 @@
 #include <spinlock.hpp>
+#include <linux/futex.h>
+#include <sys/syscall.h>
 
 ///////////////////////////////////////////////////////////////
 
@@ -6,7 +8,7 @@ TASSpinlock::TASSpinlock() {
 	locked_.store(false);
 }
 
-void TASSpinlock::Lock() {
+void TASSpinlock::lock() {
 	// backoff untill all others unlock
 	while (locked_.exchange(true)) {
 		// Backoff
@@ -24,9 +26,7 @@ void TASSpinlock::Lock() {
 	*/
 }
 
-
-
-void TASSpinlock::Unlock() {
+void TASSpinlock::unlock() {
 	locked_.store(false);
 }
 
@@ -37,7 +37,7 @@ TicketLock::TicketLock() {
 	next_free_ticket_.store(0);
 }
 
-void TicketLock::Lock() {
+void TicketLock::lock() {
 	size_t my_ticket = next_free_ticket_.fetch_add(1);
 
 	while (my_ticket != owner_ticket_.load()) {
@@ -45,6 +45,6 @@ void TicketLock::Lock() {
 	}
 }
 
-void TicketLock::Unlock() {
+void TicketLock::unlock() {
 	owner_ticket_.fetch_add(1);
 }

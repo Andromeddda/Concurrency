@@ -22,7 +22,8 @@ CFLAGS = \
 	-Werror \
 	-Wextra \
 	-std=c++20 \
-	-O3
+	-O3 \
+	-g
 
 # Add include directory
 CFLAGS += -I $(abspath $(INCLUDES))

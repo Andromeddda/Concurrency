@@ -10,8 +10,8 @@ public:
 	TASSpinlock();
 	TASSpinlock(const TASSpinlock& other) = delete;
 
-	void Lock();
-	void Unlock();
+	void lock();
+	void unlock();
 private:
 	std::atomic<bool> locked_;
 };
@@ -22,8 +22,8 @@ public:
 	TicketLock();
 	TicketLock(const TicketLock& other) = delete;
 
-	void Lock();
-	void Unlock();
+	void lock();
+	void unlock();
 private:
 	std::atomic<size_t> owner_ticket_;
 	std::atomic<size_t> next_free_ticket_;
