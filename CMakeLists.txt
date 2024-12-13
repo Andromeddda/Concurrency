@@ -4,7 +4,8 @@ project(concurrency LANGUAGES CXX)
 
 
 set(SOURCES
-    src/mutex/mutexes.cpp)
+    src/mutex/mutexes.cpp
+    src/thread_pool/thread_pool.cpp)
 
 add_library(${PROJECT_NAME} ${SOURCES})
 

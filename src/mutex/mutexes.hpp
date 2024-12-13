@@ -11,7 +11,7 @@
 class AbstractMutex
 {
 public:
-    AbstractMutex();
+    AbstractMutex() {}
     AbstractMutex(const AbstractMutex& other) = delete;
 
     virtual void lock() = 0;
